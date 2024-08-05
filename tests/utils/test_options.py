@@ -51,6 +51,10 @@ typecheck_options = [
         "options": {"weight": "0"},
         "error": "`weight` must be of type <class 'int'>. Got <class 'str'> instead.",
     },
+    {
+        "options": {"mode": "unknown"},
+        "error": "`mode` must be one of 'exactly', 'less than', 'more than', or 'approximately'.",
+    },
 ]
 
 

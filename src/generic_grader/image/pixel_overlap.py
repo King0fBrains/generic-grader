@@ -18,11 +18,11 @@ def doc_func(func, num, param):
 
     call_str = make_call_str(o.obj_name, o.args, o.kwargs)
     docstring = (
-        f"Check that the {o.region_a}"
+        f"Check that the {o.region_inner}"
         f" from your `{o.obj_name}` function when called as `{call_str}`"
         + (o.entries and f" with entries={o.entries}" or "")
         + f" has {o.mode} {o.threshold} pixels"
-        + f" in the {o.region_b}."
+        + f" in the {o.region_outer}."
     )
 
     return docstring
@@ -57,29 +57,29 @@ def build(options):
             # Test the result.
             if o.mode == "less than":
                 message = str(
-                    f"\nThe {o.region_a} has too many pixels"
-                    f" in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
+                    f"\nThe {o.region_inner} has too many pixels"
+                    f" in the {o.region_outer}." + (o.hint and f" {o.hint}" or "")
                 )
                 self.assertLess(pixels, o.threshold, msg=message)
 
             elif o.mode == "more than":
                 message = str(
-                    f"\nThe {o.region_a} does not have enough pixels"
-                    f" in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
+                    f"\nThe {o.region_inner} does not have enough pixels"
+                    f" in the {o.region_outer}." + (o.hint and f" {o.hint}" or "")
                 )
                 self.assertGreater(pixels, o.threshold, msg=message)
 
             elif o.mode == "exactly":
                 message = str(
-                    f"\nThe {o.region_a} does not have exactly {o.threshold} "
-                    f"pixels in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
+                    f"\nThe {o.region_inner} does not have exactly {o.threshold} "
+                    f"pixels in the {o.region_outer}." + (o.hint and f" {o.hint}" or "")
                 )
                 self.assertEqual(pixels, o.threshold, msg=message)
 
             elif o.mode == "approximately":
                 message = str(
-                    f"\nThe {o.region_a} should have approximately {o.threshold}"
-                    f"pixels in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
+                    f"\nThe {o.region_inner} should have approximately {o.threshold}"
+                    f"pixels in the {o.region_outer}." + (o.hint and f" {o.hint}" or "")
                 )
                 self.assertAlmostEqual(pixels, o.threshold, msg=message, delta=o.delta)
 

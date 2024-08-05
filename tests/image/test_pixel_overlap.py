@@ -11,7 +11,7 @@ from generic_grader.utils.options import Options
 def built_class():
     """Provide the class built by the build function."""
     return build(
-        Options(region_a="path", region_b="walls", mode="exactly", threshold=0)
+        Options(region_inner="path", region_outer="walls", mode="exactly", threshold=0)
     )
 
 
@@ -223,17 +223,6 @@ pixel_cases = [
         "ref_image": 100,
         "sub_image": 0,
         "error": AssertionError,
-    },
-    {
-        "options": Options(
-            ref_image="ref_image.png",
-            sub_image="sub_image.png",
-            mode="unknown",
-            threshold=100,
-        ),
-        "ref_image": None,
-        "sub_image": None,
-        "error": ValueError,
     },
 ]
 

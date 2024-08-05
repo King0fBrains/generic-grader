@@ -67,8 +67,8 @@ class Options:
     mode: str = "exactly"
     ref_image: str = "sol_inv.png"
     sub_image: str = "tests/output.png"
-    region_a: str = ""
-    region_b: str = ""
+    region_inner: str = ""
+    region_outer: str = ""
     threshold: int = 0
     delta: int = 0
 
@@ -96,6 +96,10 @@ class Options:
             s = set(attr)
             if len(s) != len(attr):
                 raise ValueError(f"Duplicate entries in {name}.")
+        if self.mode not in ["exactly", "less than", "more than", "approximately"]:
+            raise ValueError(
+                "`mode` must be one of 'exactly', 'less than', 'more than', or 'approximately'."
+            )
 
 
 @define(kw_only=True, frozen=True)
