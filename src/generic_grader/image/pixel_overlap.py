@@ -83,10 +83,4 @@ def build(options):
                 )
                 self.assertAlmostEqual(pixels, o.threshold, msg=message, delta=o.delta)
 
-            else:
-                raise ValueError(
-                    f"Unknown mode: {o.mode}. Allowed values are: less than, "
-                    "more than, exactly, or approximately"
-                )
-
     return TestPixelOverlap

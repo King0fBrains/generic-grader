@@ -45,8 +45,8 @@ def test_doc_func(built_instance):
     """Test that the doc_func function returns the correct docstring."""
     docstring = built_instance.test_pixel_overlap_0.__doc__
     assert (
-        "Check that the path from your `main` function when called as `main()` has exactly 0 pixels in the walls."
-        == docstring
+        "Check that the path from your `main` function when called as "
+        "`main()` has exactly 0 pixels in the walls." == docstring
     )
 
 
@@ -85,8 +85,7 @@ pixel_cases = [
         "sub_image": 9,
         "error": None,
     },
-    # Is this intended? This test will always pass as long as ref_image is empty. Should we raise an error?
-    {
+    {  # Check that even when the ref_image has no pixels the mode passes.
         "options": Options(
             ref_image="ref_image.png",
             sub_image="sub_image.png",
@@ -108,7 +107,6 @@ pixel_cases = [
         "sub_image": 101,
         "error": None,
     },
-    # Is this intended?
     {
         "options": Options(
             ref_image="ref_image.png",
