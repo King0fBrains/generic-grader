@@ -39,8 +39,8 @@ def build(options):
         @parameterized.expand(the_params, doc_func=doc_func)
         @weighted
         def test_pixel_overlap(self, options):
-            """Check if white pixels in black and white images A and B overlap the
-            expected amount.
+            """Check if white pixels in black and white images A and B
+            overlap the expected amount.
             """
 
             o = options
@@ -71,22 +71,22 @@ def build(options):
 
             elif o.mode == "exactly":
                 message = str(
-                    f"\nThe {o.region_a} does not have exactly {o.threshold} pixels"
-                    f" in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
+                    f"\nThe {o.region_a} does not have exactly {o.threshold} "
+                    f"pixels in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
                 )
                 self.assertEqual(pixels, o.threshold, msg=message)
 
             elif o.mode == "approximately":
                 message = str(
-                    f"\nThe {o.region_a} should have approximately {o.threshold} pixels"
-                    f" in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
+                    f"\nThe {o.region_a} should have approximately {o.threshold}"
+                    f"pixels in the {o.region_b}." + (o.hint and f" {o.hint}" or "")
                 )
                 self.assertAlmostEqual(pixels, o.threshold, msg=message, delta=o.delta)
 
             else:
                 raise ValueError(
-                    f"Unknown mode: {o.mode}. Allowed values are: less than, more than, "
-                    "exactly, or approximately"
+                    f"Unknown mode: {o.mode}. Allowed values are: less than, "
+                    "more than, exactly, or approximately"
                 )
 
     return TestPixelOverlap
