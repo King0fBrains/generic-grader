@@ -107,7 +107,8 @@ pixel_cases = [
         "sub_image": 101,
         "error": None,
     },
-    {
+    {  # Check that even when the ref_image more pixels than
+        # the sub_image the mode passes.
         "options": Options(
             ref_image="ref_image.png",
             sub_image="sub_image.png",
@@ -176,7 +177,7 @@ pixel_cases = [
         "sub_image": 200,
         "error": AssertionError,
     },
-    {
+    {  # Check that when the sub_image has less pixels than expected the mode fails.
         "options": Options(
             ref_image="ref_image.png",
             sub_image="sub_image.png",
@@ -187,7 +188,7 @@ pixel_cases = [
         "sub_image": 9,
         "error": AssertionError,
     },
-    {
+    {  # Check that when the sub_image has no pixels the mode fails.
         "options": Options(
             ref_image="ref_image.png",
             sub_image="sub_image.png",
@@ -198,7 +199,7 @@ pixel_cases = [
         "sub_image": 0,
         "error": AssertionError,
     },
-    {
+    {  # Check that when the sub_image is outside the delta the mode fails.
         "options": Options(
             ref_image="ref_image.png",
             sub_image="sub_image.png",
@@ -210,7 +211,7 @@ pixel_cases = [
         "sub_image": 9,
         "error": AssertionError,
     },
-    {
+    {  # Check that when the sub_image has no pixels the mode fails.
         "options": Options(
             ref_image="ref_image.png",
             sub_image="sub_image.png",
@@ -255,3 +256,32 @@ def test_pixel_overlap(case, fix_syspath):
             instance.test_pixel_overlap_0()
     else:
         instance.test_pixel_overlap_0()
+
+
+def test_init(fix_syspath, capsys):
+    """Test that the init function works as expected."""
+
+    # Create a fake init function.
+    def init(self, options):
+        print("Hello, World!")
+
+    o = Options(
+        ref_image="ref_image.png",
+        sub_image="sub_image.png",
+        init=init,
+    )
+    # Create the blank images.
+    width, height = 1000, 1000
+    ref_image = Image.new("RGB", (width, height), color="white")
+    sub_image = Image.new("RGB", (width, height), color="white")
+    ref_image = ImageChops.invert(ref_image.convert("1"))
+    sub_image = ImageChops.invert(sub_image.convert("1"))
+    ref_image.save(o.ref_image)
+    sub_image.save(o.sub_image)
+    # Create the built class and instance
+    built_class = build(o)
+    instance = built_class(methodName="test_pixel_overlap_0")
+    instance.test_pixel_overlap_0()
+    # Check that the init function was called.
+    captured = capsys.readouterr()
+    assert "Hello, World!" in captured.out
