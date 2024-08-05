@@ -63,6 +63,15 @@ class Options:
     relative_tolerance: float = 1e-7
     absolute_tolerance: int = 0
 
+    # Image
+    mode: str = "exactly"
+    ref_image: str = "sol_inv.png"
+    sub_image: str = "tests/output.png"
+    region_a: str = ""
+    region_b: str = ""
+    threshold: int = 0
+    delta: int = 0
+
     def __attrs_post_init__(self):
         for attr in self.__annotations__:
             if attr == "init":
