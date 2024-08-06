@@ -34,7 +34,7 @@ test_04_TestOutput = output_lines_match_reference.build(
         obj_name="main",
         sub_module="hello_user",
         entries=("AJ",),
-        ref_module="reference",
+        ref_module="referencett",
     ),
 )
 
