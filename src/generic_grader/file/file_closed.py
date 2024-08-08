@@ -4,6 +4,7 @@ import functools
 import textwrap
 import unittest
 import warnings
+import json
 
 from parameterized import parameterized
 
